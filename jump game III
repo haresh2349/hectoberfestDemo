@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool canReach(vector<int>& arr, int start) {
+	int n = arr.size();
+	vector<int>res(n);
+	queue<int>q;
+	q.push(start);
+	while (q.size())
+	{
+		int val = q.front(); q.pop();
+		res[val] = 1;
+		if (arr[val] == 0)return true;
+		int i = val + arr[val];
+		int j = val - arr[val];
+		if (j >= 0 and !res[j])q.push(j);
+		if (i < n and !res[i])q.push(i);
+	}
+	return false;
+
+}
+int main(int argc, char const *argv[])
+{
+
+	int n;
+	cin >> n;
+	vector<int>arr(n);
+	for (int i = 0; i < n; i++)
+	{
+		cin >> arr[i];
+	}
+	cout << canReach(arr, 5);
+	return 0;
+}
